@@ -10,7 +10,6 @@ public class Character {
  private int exp = 0;
  private int lvl = 0;
  private int id;
- private int coins;
  private SpecialAttack special1;
  private SpecialAttack special2;
  private SpecialAttack special3;
@@ -126,11 +125,5 @@ public class Character {
    }
    public int getGameId() {
     return gameId; 
-   }
-   public void setCoins(int tempCoins){
-     coins = tempCoins;
-   }
-   public int getCoins(){
-     return coins;
    }
 }

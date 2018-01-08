@@ -1,0 +1,88 @@
+import java.util.*;
+public class Weapon {
+  private String name;
+  private String location;
+  private String description;
+  private double damageMod;
+  private int level;
+  private int requirements;
+  private String upgrades;
+  private int cost;
+  private int sell;
+  public Weapon(String name, String location, String description, double damageMod, int level, int requirements, String upgrades, int cost, int sell){
+    this.name = name;
+    this.location = location;
+    this.description = description;
+    this.damageMod = damageMod;
+    this.level = level;
+    this.requirements = requirements;
+    this.upgrades = upgrades;
+    this.cost = cost;
+    this.sell = sell;
+  }
+  public Weapon(){
+    this.name = "";
+    this.location = "Unknown";
+    this.description = "";
+    this.damageMod = 1;
+    this.level = 0;
+    this.requirements = 0;
+    this.upgrades = "0";
+    this.cost = 0;
+    this.sell = 0;
+  }
+  public void setName(String tempName){
+    name = tempName;
+  }
+  public String getName(){
+    return name;
+  }
+  public void setLocation(String tempLocation){
+    location = tempLocation;
+  }
+  public String getLocation(){
+    return location;
+  }
+  public void setDesc(String tempDesc){
+    description = tempDesc;
+  }
+  public String getDesc(){
+    return description;
+  }
+  public void setMod(double tempMod){
+    damageMod = tempMod;
+  }
+  public double getMod(){
+    return damageMod;
+  }
+  public void setLevel(int tempLevel){
+    level = tempLevel;
+  }
+  public int getLevel(){
+    return level;
+  }
+  public void setReq(int tempReq){
+    requirements = tempReq;
+  }
+  public int getReq(){
+    return requirements;
+  }
+  public void setUpgrades(String tempUpgrades){
+    upgrades = tempUpgrades;
+  }
+  public String getUpgrades(){
+    return upgrades;
+  }
+  public void setCost(int tempCost){
+    cost = tempCost;
+  }
+  public int getCost(){
+    return cost;
+  }
+  public void setSell(int tempSell){
+    sell = tempSell;
+  }
+  public int getSell(){
+    return sell;
+  }
+}
