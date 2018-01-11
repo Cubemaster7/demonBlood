@@ -23,7 +23,7 @@ public class gameTest {
       npc2 = new Character(2, 3);
     }
     
-    
+    randomPhrase();
     if (battle(player, npc1, npc2, new Enemy(1))) {
       System.out.println("The team won!");
     }
@@ -51,13 +51,17 @@ public class gameTest {
     npc1.startBattle();
     npc2.startBattle();
     int aggro = 1;
+    GameMusicPlayer music = new GameMusicPlayer("kittyMarchingBand.mp3"
+                                               );
+    music.play();
     printBetter(enemy.getName()+" begins a battle!");
     //printBetter(getQuote(1,1));
-    while (player.getHp()!=0 && enemy.getHp() != 0) {
+    while ((player.getHp()!=0 || npc1.getHp()!=0 || npc2.getHp()!=0) && enemy.getHp() != 0) {
       System.out.println(player.getName()+": "+player.getHp()+"HP | Special 1: "+boolToReady(player.getSpecial(1).isReady())+" | Special 2: "+boolToReady(player.getSpecial(2).isReady())+" | Special 3: "+boolToReady(player.getSpecial(3).isReady()));
       System.out.println(npc1.getName()+": "+npc1.getHp()+"HP");
       System.out.println(npc2.getName()+": "+npc2.getHp()+"HP");
       System.out.println(enemy.getName()+": "+enemy.getHp()+"HP");
+      if(player.isAlive()) {
       System.out.println("1=Standard Attack 2=Special Attack 3=Flee");
       int userin = getInput(3);
       switch (userin) {
@@ -92,9 +96,14 @@ public class gameTest {
         default:
           break;
       }
+      }
       if (enemy.getHp()!=0) {
+        if (npc1.isAlive()) {
       npcAttack(npc1, enemy, player, npc2);
+        }
+        if (npc2.isAlive()) {
       npcAttack(npc2, enemy, player, npc1);
+        }
       int aggroCheck = enemy.aggroCheck();
       if (aggroCheck == 1) {
         aggro = 1;
@@ -123,10 +132,11 @@ public class gameTest {
       npc2.incrementSpecials();
     }
     }
-    if (player.getHp() == 0) {
+    if (player.getHp() == 0 && npc1.getHp() == 0 && npc2.getHp() == 0) {
       return false;
     }
     else {
+      
       return true;
     }
   }
@@ -205,9 +215,15 @@ public class gameTest {
       }
       if (special.getIsHeal()) {
        printBetter("The team heals by "+special.getHeal()+"!");
-       character.modHp(special.getHeal()); 
+       if (character.getHp() != 0) {
+       character.modHp(special.getHeal());
+       }
+       if (mate1.getHp() != 0) {
        mate1.modHp(special.getHeal());
+       }
+       if (mate2.getHp() != 0) {
        mate2.modHp(special.getHeal());
+       }
       }
       if (special.getIsAggro()) {
        enemy.changeAggro(character.getGameId(), special.getAggro()); 
@@ -227,7 +243,15 @@ public class gameTest {
    input.nextLine();
    input.close();
   }
-  
+  public static void randomPhrase() {
+   System.out.print("The 3 heroes set off to ");
+   String[] verbs = new String[]{"kill", "sniff", "jounce", "lick", "like", "rek", "joust", "befriend", "beat","eat","caress"};
+   String[] nouns = new String[]{"limb", "friend", "pope", "broadsword", "lady", "King", "world", "meat","AP Computer Science Class", "bible"};
+   System.out.print(verbs[getRandom(0,(verbs.length-1))]);
+   System.out.print(" the ");
+   System.out.print(nouns[getRandom(0,(nouns.length-1))]);
+   System.out.println("!");
+  }
   
   public static int getChance(int attackerStat, int defenderStat) {
    int returner;

@@ -7,10 +7,15 @@ public class Character {
  private int con = 10;
  private int dex = 10;
  private int agi = 10;
+ private int baseStr = 10;
+ private int baseCon = 10;
+ private int baseDex = 10;
+ private int baseAgi = 10;
  private int exp = 0;
  private int lvl = 0;
  private int id;
- private int coins;
+ private boolean alive = true;
+
  private SpecialAttack special1;
  private SpecialAttack special2;
  private SpecialAttack special3;
@@ -97,6 +102,7 @@ public class Character {
      hp += hpMod;
      if (hp <= 0) {
        hp = 0;
+       alive = false;
      }
      if (hp >= maxHp) {
        hp = maxHp;
@@ -106,6 +112,11 @@ public class Character {
      special1.resetCooldown();
      special2.resetCooldown();
      special3.resetCooldown();
+     str = baseStr;
+     agi = baseAgi;
+     con = baseCon;
+     dex = baseDex;
+     alive = true;
    }
    public SpecialAttack getSpecial(int id) {
      switch (id) {
@@ -127,10 +138,7 @@ public class Character {
    public int getGameId() {
     return gameId; 
    }
-   public void setCoins(int tempCoins){
-     coins = tempCoins;
-   }
-   public int getCoins(){
-     return coins;
+   public boolean isAlive() {
+     return alive;
    }
 }
