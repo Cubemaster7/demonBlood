@@ -1,114 +1,103 @@
 public class Weapon {
   private String name;
-  private String location;
-  private String description;
-  private double damageMod;
-  private int level;
-  private int requirements;
-  private String upgrades;
-  private int cost;
-  private int sell;
-  private boolean have;
+  private String adjective;
+  private int str;
+  private int con;
+  private int agi;
+  private int dex;
+  private int price;
   private int id;
-  private boolean testShopHas;
-  public Weapon(String name, String location, String description, double damageMod, int level, int requirements, String upgrades, int cost, int sell, boolean have, int id, boolean testShopHas){
-    this.name = name;
-    this.location = location;
-    this.description = description;
-    this.damageMod = damageMod;
-    this.level = level;
-    this.requirements = requirements;
-    this.upgrades = upgrades;
-    this.cost = cost;
-    this.sell = sell;
-    this.have = have;
-    this.id = id;
-    this.testShopHas = testShopHas;
+  public Weapon(int id){
+   this.id = id;
+   switch (id) { 
+     case 1:
+       name = "Wooden Weapon";
+       adjective = "Wooden";
+       str = 0;
+       con = 0;
+       agi = 0;
+       dex = 0;
+       price = 10;
+       break;
+     case 2:
+       name = "Steel Weapon";
+       adjective = "Steel";
+       str = 1;
+       con = 1;
+       agi = 1;
+       dex = 1;
+       price = 30;
+       break;
+     case 3:
+       name = "Magic Weapon";
+       adjective = "Magic";
+       str = 2;
+       con = 2;
+       agi = 2;
+       dex = 2;
+       price = 50;
+       break;
+     case 4:
+       name = "Crystal Weapon";
+       adjective = "Crystal";
+       str = 3;
+       con = 3;
+       agi = 3;
+       dex = 3;
+       price = 100;
+       break;
+     case 5:
+       name = "Holy Weapon";
+       adjective = "Holy";
+       str = 4;
+       con = 4;
+       agi = 4;
+       dex = 4;
+       price = 300;
+       break;
+     case 6:
+       name = "Godly Weapon";
+       adjective = "Godly";
+       str = 5;
+       con = 5;
+       agi = 5;
+       dex = 5;
+       price = 1000;
+       break;
+   }
   }
-  public Weapon(){
-    this.name = "";
-    this.location = "Unknown";
-    this.description = "";
-    this.damageMod = 1;
-    this.level = 0;
-    this.requirements = 0;
-    this.upgrades = "0";
-    this.cost = 0;
-    this.sell = 0;
-    this.have = false;
-    this.id = -1;
-    this.testShopHas = false;
-  }
-  public void setName(String tempName){
-    name = tempName;
-  }
+ 
+
   public String getName(){
     return name;
-  }
-  public void setLocation(String tempLocation){
-    location = tempLocation;
-  }
-  public String getLocation(){
-    return location;
-  }
-  public void setDesc(String tempDesc){
-    description = tempDesc;
   }
   public String getDesc(){
     return description;
   }
-  public void setMod(double tempMod){
-    damageMod = tempMod;
-  }
-  public double getMod(){
-    return damageMod;
-  }
-  public void setLevel(int tempLevel){
-    level = tempLevel;
-  }
+ 
   public int getLevel(){
     return level;
   }
-  public void setReq(int tempReq){
-    requirements = tempReq;
+  public int getStr() {
+    return str;
   }
-  public int getReq(){
-    return requirements;
+  public int getCon() {
+    return con;
   }
-  public void setUpgrades(String tempUpgrades){
-    upgrades = tempUpgrades;
+  public int getAgi() {
+    return agi;
   }
-  public String getUpgrades(){
-    return upgrades;
+  public int getDex() {
+    return dex;
   }
-  public void setCost(int tempCost){
-    cost = tempCost;
-  }
-  public int getCost(){
-    return cost;
-  }
-  public void setSell(int tempSell){
-    sell = tempSell;
-  }
-  public int getSell(){
-    return sell;
-  }
-  public void setHave(boolean tempHave){
-    have = tempHave;
-  }
-  public boolean getHave(){
-    return have;
-  }
-  public void setId(int tempId){
-    id = tempId;
+  public int getPrice(){
+    return price;
   }
   public int getId(){
     return id;
   }
-  public void setTestShop(boolean tempTestShop){
-    testShopHas = tempTestShop;
-  }
-  public boolean getTestShop(){
-    return testShopHas;
+ 
+  public String getAdjective() {
+    return adjective;
   }
 }

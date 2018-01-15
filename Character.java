@@ -1,3 +1,4 @@
+import java.util.*;
 public class Character {
  private String name = new String();
  private String fullName = new String();
@@ -14,7 +15,13 @@ public class Character {
  private int exp = 0;
  private int lvl = 0;
  private int id;
+ private int coins = 50;
+ private String pronoun;
+ private String posPronoun;
  private boolean alive = true;
+ private Weapon weapon = new Weapon(1);
+ private ArrayList<Weapon> inventory=new ArrayList<Weapon>();  
+ private Location[] locationList = new Location[9];
 
  private SpecialAttack special1;
  private SpecialAttack special2;
@@ -30,6 +37,9 @@ public class Character {
      special1 = new SpecialAttack(1);
      special2 = new SpecialAttack(2);
      special3 = new SpecialAttack(3);
+     pronoun = "he";
+     posPronoun = "his";
+    
    }
    else if (id == 2) {
      name = "Claudius";
@@ -38,6 +48,9 @@ public class Character {
      special1 = new SpecialAttack(4);
      special2 = new SpecialAttack(5);
      special3 = new SpecialAttack(6);
+     pronoun = "he";
+     posPronoun = "his";
+   
    }
    else if (id == 3) {
     name = "Rosalina"; 
@@ -46,12 +59,29 @@ public class Character {
     special1 = new SpecialAttack(7);
     special2 = new SpecialAttack(8);
     special3 = new SpecialAttack(9);
+    pronoun = "she";
+    posPronoun = "her";
+  
    }
    this.gameId = gameId;
+   if (gameId==1) {
+    locationList[0] = new Location(2); //Starting village
+    locationList[1] = new Location(1);  //refugee camp
+    locationList[2] = new Location(0);  //Everton Forest
+    locationList[3] = new Location(3);  //second town
+    locationList[4] = new Location(4); //Field of Stones
+    locationList[5] = new Location(5); //Deepland swamp
+    locationList[6] = new Location(6); //Daemonium Cliffs
+    locationList[7] = new Location(7);  //Around Town
+    locationList[8] = new Location(8);  //Easthaven City
+   }
  }
    
    public String getName() {
      return name;
+   }
+   public String getFullName() {
+     return fullName;
    }
    public int getMaxHp() {
      return maxHp;
@@ -140,5 +170,40 @@ public class Character {
    }
    public boolean isAlive() {
      return alive;
+   }
+   public String pro() {
+     return pronoun;
+   }
+   public String pos() {
+     return posPronoun;
+   }
+   public void modCoins(int coinMod) {
+     coins += coinMod;
+   }
+   public int getCoins() {
+     return coins;
+   }
+   public Location[] getLocationList() {
+     return locationList;
+   }
+   public ArrayList<Weapon> getInventory() {
+    return inventory; 
+   }
+   public String getWeaponName() {
+     switch (id) {
+       case 1:
+         return (weapon.getAdjective()+" Sword");
+       case 2:
+         return (weapon.getAdjective()+" Club");
+       case 3:
+         return (weapon.getAdjective()+" Spear");
+     }
+     return " ";
+   }
+   public Weapon getWeapon() {
+     return weapon;
+   }
+   public void setWeapon(int id) {
+     weapon = new Weapon(id);
    }
 }

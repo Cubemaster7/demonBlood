@@ -16,7 +16,18 @@ public class Enemy {
  
  public Enemy(int newId) {
    id = newId;
-   if (id==1) {
+   switch (id) {
+     case 0:
+     name = "Demon Weakling";
+     maxHp = 500;
+     str = 5;
+     con = 5;
+     dex = 3;
+     agi = 3;
+     ableToFlee = true;
+     break;
+     
+     case 1:
      name = "Demon";
      maxHp = 1000;
      str = 20;
@@ -24,6 +35,7 @@ public class Enemy {
      dex = 10;
      agi = 10;
      ableToFlee = true;
+     break;
    }
    hp = maxHp;
  }

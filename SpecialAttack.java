@@ -86,14 +86,14 @@ public class SpecialAttack {
         isHeal = true;
         isDamage = true;
         damage = 2;
-        heal = 125;
+        heal = 75;
         cooldown = 6;
         break;
       case 9:
         name = "Full Flood";
         description = "Majorly heals the team";
         isHeal = true;
-        heal = 300;
+        heal = 150;
         cooldown = 9;
         break;
 
