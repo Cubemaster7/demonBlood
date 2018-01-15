@@ -71,13 +71,6 @@ public class Weapon {
   public String getName(){
     return name;
   }
-  public String getDesc(){
-    return description;
-  }
- 
-  public int getLevel(){
-    return level;
-  }
   public int getStr() {
     return str;
   }

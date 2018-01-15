@@ -2,7 +2,7 @@ import java.util.*;
 public class gameTest {
   public static void main(String[] args) {
     GameTitleCard gmt = new GameTitleCard("DEMONBLOOD.png", 614, 460);
-    //gmt.isVisible(true);
+    gmt.isVisible(true);
     System.out.println("Who would you like to play as?");
     System.out.println("1. Australius Gage");
     System.out.println("2. Claudius Steed");
@@ -28,7 +28,7 @@ public class gameTest {
     
     while (playing) {
      if (player.getLocationList()[location].haventBeen()) {
-       //cutscene(player.getLocationList()[location].getFirstTimeCutscene(), player, npc1, npc2);
+       cutscene(player.getLocationList()[location].getFirstTimeCutscene(), player, npc1, npc2);
      }
       if (player.getLocationList()[location].getMany() == 0 && player.getLocationList()[location].getAreaRevealed()) {
       System.out.println("1=Talk to people 2=Customize 3=Shop 4=Leave 5=Go to "+player.getLocationList()[location].getArea());
@@ -56,7 +56,7 @@ public class gameTest {
        shop(player, location);
      }
      else if (player.getLocationList()[location].getMany() != 0 && userin == 3) {
-       battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getBoss());
+       battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getBoss()));
      }
      else if (userin == 4) {
        int availablePlaces = 0;
@@ -488,8 +488,8 @@ public class gameTest {
         printBetter(player.getName()+" is disappointed to have to leave "+player.pos()+" friends so early, but "+player.pro()+" has a lot of work to do in the morning.");
         printBetter(player.getName()+" stares back at the wooden walls of the tavern for a few seconds, taking in the dulled noises of clinking dishes and human commotion.");
         printBetter("Taking a deep sigh, "+player.pro()+" starts on "+player.pos()+" way down the beaten main road and side streets to home, a cozy shack in the southwestern quadrant of the village.");
-        //GameMusicPlayer music = new GameMusicPlayer("countdown.mp3");
-        //music.play();
+        GameMusicPlayer music = new GameMusicPlayer("countdown.mp3");
+        music.play();
         printBetter("Suddenly, the world lights up and noise erupts all around "+player.getName()+"!");
         printBetter(player.getName()+" turns around, startled, to see the tavern in flames.");
         printBetter("Screams echo from inside as the bodies burn in the hungry flames. Soon, houses and buildings all throughout the village undergo the same gruesome fate.");
