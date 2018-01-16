@@ -2,18 +2,18 @@ import java.util.*;
 public class Character {
  private String name = new String();
  private String fullName = new String();
- private int maxHp = 1000;
- private int hp = 1000;
- private int str = 10;
- private int con = 10;
- private int dex = 10;
- private int agi = 10;
- private int baseStr = 10;
- private int baseCon = 10;
- private int baseDex = 10;
- private int baseAgi = 10;
+ private int maxHp = 500;
+ private int hp = 500;
+ private int str = 5;
+ private int con = 5;
+ private int dex = 5;
+ private int agi = 5;
+ private int baseStr = 5;
+ private int baseCon = 5;
+ private int baseDex = 5;
+ private int baseAgi = 5;
  private int exp = 0;
- private int lvl = 0;
+ private int lvl = 5;
  private int id;
  private int coins = 50;
  private String pronoun;
@@ -139,13 +139,14 @@ public class Character {
      }
    }
    public void startBattle() {
+     hp = maxHp;
      special1.resetCooldown();
      special2.resetCooldown();
      special3.resetCooldown();
-     str = baseStr;
-     agi = baseAgi;
-     con = baseCon;
-     dex = baseDex;
+     str = baseStr + weapon.getStr();
+     agi = baseAgi + weapon.getAgi();
+     con = baseCon + weapon.getCon();
+     dex = baseDex + weapon.getDex();
      alive = true;
    }
    public SpecialAttack getSpecial(int id) {
@@ -206,4 +207,15 @@ public class Character {
    public void setWeapon(int id) {
      weapon = new Weapon(id);
    }
+  public boolean getExp(int expToGet) {
+   exp += expToGet;
+   if (exp >= 100) {
+    lvl++;
+    exp -= 100;
+    return true;
+   }
+   else {
+    return false;
+   }
+  }
 }
