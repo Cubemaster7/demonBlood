@@ -61,11 +61,12 @@ public class gameTest {
         shop(player, location);
       }
       else if (player.getLocationList()[location].getMany() != 0 && userin == 3) {
-        battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getBoss()));
+        //battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getBoss()));
+        cutscene(player.getLocationList()[location].getLastTimeCutscene(), player, npc1, npc2);
       }
       else if (userin == 4) {
         int availablePlaces = 0;
-        for (int i = 0; i<player.getLocationList().length; i++ ) {
+        for (int i = 0; i<player.getLocationList().length; i++) {
           if (player.getLocationList()[i].getAbleToGo()) {
             System.out.println((i+1)+": "+player.getLocationList()[i].getName());
             availablePlaces++;
@@ -73,6 +74,9 @@ public class gameTest {
         }
         location = getInput(availablePlaces)-1;
         printBetter("The team arrived at "+player.getLocationList()[location].getName()+"!");
+      }
+      else {
+        cutscene(player.getLocationList()[location].getLastTimeCutscene(), player, npc1, npc2);
       }
     }
     randomPhrase();
