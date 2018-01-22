@@ -1,56 +1,56 @@
-public class Location{
-  private String name;
+public class Location{ //object for calling and storing locations
+  private String name; 
   private String description;
   private int recommendedLevel;
-  private int manymies;
-  private int[] enemyTypes;
-  private int[] weaponTypes;
-  private String area;
-  private boolean areaRevealed = false;
-  private int id;
-  private int firstTimeCutscene;
-  private int endCutscene;
-  private int boss;
-  private boolean ableToGo = false;
-  private boolean haventBeen = true;
-  private boolean haventBeen2 = true;
-  private String dialogue1;
+  private int manymies;  //how many enemies there are in an area
+  private int[] enemyTypes;  //array for the types of enemies in an area. It is ints because each enemy has an id
+  private int[] weaponTypes;  //array for the types of weapons at a town's shop
+  private String area;  //what the special area is
+  private boolean areaRevealed = false;  //if the special area is available to the player
+  private int id;  //location id so it can be easily referenced
+  private int firstTimeCutscene;  //what number corresponds to the first cutscene number in the cutscene method in the main code
+  private int endCutscene;//what number corresponds to the end cutscene number in the cutscene method in the main code
+  private int boss; //id for boss
+  private boolean ableToGo = false; //if you can go to an area
+  private boolean haventBeen = true;  //if you havent been through the first cutscene
+  private boolean haventBeen2 = true;  //if you havent been through the last cutscene
+  private String dialogue1; //dialogues for talking to people 
   private String dialogue2;
   private String dialogue3;
-  private boolean cutsceneComplete = false;
-  public Location(int id){   
+  private boolean cutsceneComplete = false;  //if the player has completed the cutscene
+  public Location(int id){   //depending on the id, it will call one of the following locations
     this.id = id;
     switch (id) {
       case 0:
-        name = "Whiteridge";
-        description = "The starting town";
-        manymies = 0;
-        firstTimeCutscene = 1;
-        endCutscene = 2;
-        boss = 1;
-        ableToGo=false;
+        name = "Whiteridge";//name
+        description = "The starting town"; //description
+        manymies = 0; //there are 0 enemies here
+        firstTimeCutscene = 1; //the first cutscene will be found at case 1 in the cutscene method in the main code
+        endCutscene = 2; //the last cutscene will be found at case 2 in the cutscene method in the main code
+        boss = 1; //there is a boss
+        ableToGo=false; //you cant go back here as it is the first town
         break;
       case 1:
         name = "Refugee Camp";
         description = "An area full of people made homeless by the demon's wrath";
-        area = "Central Office";
+        area = "Central Office"; //special area
         firstTimeCutscene = 3;
         endCutscene = 4;
         manymies = 0;
+        //dialogues for talking to people
         dialogue1 = "Brenda: That dastardly demon ruined all of our lives! It goes village to village, murdering the innocent!";
         dialogue2 = "Louzyr: You look new. You should head over to the main tent.";
         dialogue3 = "Reese: They may provide us with food, but in the end, we're all gunna starve. The fields burned!";
-        ableToGo=true;
+        ableToGo=true; //you can go
         break;
       case 2:
         name = "Everton Forest";
         description = "A large copse of tall trees. The expansive branch systems cast dappled shadows on the paths below.";
-        recommendedLevel = 5;
         firstTimeCutscene = 5;
         endCutscene = 6;
         manymies = 3;
-        enemyTypes = new int[]{1,2,3}; //References enemy id's in enemy.java.
-        boss = 4;
+        enemyTypes = new int[]{1,2,3}; //References enemy id's in enemy.java. each number corresponds to a case
+        boss = 4; //has a boss found at case 4 in the enemy object
         break;
       case 3:
         name = "Warrington";
@@ -62,7 +62,7 @@ public class Location{
         dialogue1 = "Joel: Don't you love it when the sun sets over the treeline?";
         dialogue2 = "Biggus: Some people here believe in really wacky stuff. I hear they praise demons. Especially those who frequent the taverns.";
         dialogue3 = "Peter: I'm always being sent to the store to buy potatoes.";
-        weaponTypes = new int[]{1,2,7,8};
+        weaponTypes = new int[]{1,2,7,8}; //weapon types at a shop. each number corresponds to a weapon case in the weapon object
         break;
       case 4:
         name = "Field of Stones";
@@ -118,6 +118,7 @@ public class Location{
         
     }
   }
+  //getters and setters
   public String getName(){
     return name;
   }
@@ -133,7 +134,7 @@ public class Location{
   public int getTypes(int number){
     return enemyTypes[number];
   }
-  public int getDialogue(int person) {
+  public int getDialogue(int person) { //calls one of the dialogues
     switch (person) {
       case 1:
       System.out.println(dialogue1);
@@ -147,7 +148,7 @@ public class Location{
     }
     return person;
   }
-  public boolean haventBeen() {
+  public boolean haventBeen() { //if this method is called it flips the switch if you havent been
     if (haventBeen) {
       haventBeen = false;
       return true;
@@ -156,7 +157,7 @@ public class Location{
       return false;
     }
   }
-  public boolean haventBeen2() {
+  public boolean haventBeen2() {//if this method is called it flips the switch if you havent been
     if (haventBeen2) {
       haventBeen2 = false;
       return true;

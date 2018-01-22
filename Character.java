@@ -1,43 +1,43 @@
 import java.util.*;
 public class Character {
- private String name = new String();
- private String fullName = new String();
- private int maxHp = 1000;
- private int hp = 1000;
- private int str = 10;
- private int con = 10;
- private int dex = 10;
- private int agi = 10;
- private int baseStr = 10;
- private int baseCon = 10;
- private int baseDex = 10;
- private int baseAgi = 10;
- private int exp = 0;
- private int lvl = 0;
- private int id;
- private int coins = 50;
- private String pronoun;
- private String posPronoun;
- private boolean alive = true;
- private Weapon weapon = new Weapon(1);
- private ArrayList<Weapon> inventory=new ArrayList<Weapon>();  
- private Location[] locationList = new Location[9];
+ private String name = new String(); //name
+ private String fullName = new String(); //full name
+ private int maxHp = 1000; //max health
+ private int hp = 1000; //health
+ private int str = 10; //attack stat
+ private int con = 10; //defense stat
+ private int dex = 10; //chance to hit stat
+ private int agi = 10; //chance to dodge stat
+ private int baseStr = 10; //base attack stat
+ private int baseCon = 10; //base defense stat
+ private int baseDex = 10; //base chance to hit stat
+ private int baseAgi = 10; //base chance to dodge stat
+ private int exp = 0; //player exp
+ private int lvl = 0; //level 
+ private int id; //player id
+ private int coins = 50; //coins
+ private String pronoun; //he or she
+ private String posPronoun; //him or her
+ private boolean alive = true; //if you arent dead
+ private Weapon weapon = new Weapon(1); //inventory
+ private ArrayList<Weapon> inventory=new ArrayList<Weapon>();   //inventory
+ private Location[] locationList = new Location[9]; //player locations available
 
- private SpecialAttack special1;
+ private SpecialAttack special1;  //special attacks
  private SpecialAttack special2;
  private SpecialAttack special3;
  private int gameId;
  
  
- public Character(int id, int gameId) {
+ public Character(int id, int gameId) { //depending on the id, chooses character
    if (id == 1) {
-     name = "Australius";
-     fullName = "Australius Gage";
-     this.id = 1;
-     special1 = new SpecialAttack(1);
+     name = "Australius"; //name
+     fullName = "Australius Gage"; //fullname
+     this.id = 1; //character id
+     special1 = new SpecialAttack(1); //special attacks
      special2 = new SpecialAttack(2);
      special3 = new SpecialAttack(3);
-     pronoun = "he";
+     pronoun = "he"; //pronouns
      posPronoun = "his";
     
    }
@@ -63,8 +63,8 @@ public class Character {
     posPronoun = "her";
   
    }
-   this.gameId = gameId;
-   if (gameId==1) {
+   this.gameId = gameId; 
+   if (gameId==1) { //locations available to the player
     locationList[0] = new Location(0); //whiteridge
     locationList[1] = new Location(1);  //refugee camp
     locationList[2] = new Location(2);  //forest
@@ -76,7 +76,7 @@ public class Character {
     locationList[8] = new Location(8);  //daemonium cliffs
    }
  }
-   
+   //getters and setters
    public String getName() {
      return name;
    }
@@ -119,12 +119,12 @@ public class Character {
    public int getExp() {
      return exp;
    }
-   public void addExp(int expMod) {
+   public void addExp(int expMod) { //when you level up
      exp += expMod;
      if(exp-50>=0){
        exp-=50;
        lvl+=1;
-       hp+=100;
+       maxHp+=100;
        str+=1;
        con+=1;
        dex+=1;
@@ -140,7 +140,7 @@ public class Character {
    public int getId() {
      return id;
    }
-   public void modHp(int hpMod) {
+   public void modHp(int hpMod) {  //modifying health
      hp += hpMod;
      if (hp <= 0) {
        hp = 0;
@@ -150,7 +150,7 @@ public class Character {
        hp = maxHp;
      }
    }
-   public void startBattle() {
+   public void startBattle() { //starting battle
      special1.resetCooldown();
      special2.resetCooldown();
      special3.resetCooldown();
@@ -201,7 +201,7 @@ public class Character {
    public ArrayList<Weapon> getInventory() {
     return inventory; 
    }
-   public String getWeaponName() {
+   public String getWeaponName() { //depending on the character, chooses weapon noun
      switch (id) {
        case 1:
          return (weapon.getAdjective()+" Sword");

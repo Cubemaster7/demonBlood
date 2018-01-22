@@ -81,12 +81,15 @@ public class gameFinal {
         userin = getInput(4);
       }
       if (player.getLocationList()[location].getMany() == 0 && userin==1) { //talking to npcs in town
+        music = new GameMusicPlayer("hometown.mp3");
         music.stop();
         if(player.getLocationList()[location].getDialogue(getRandom(1,3)) == 2){ //if the dialogue is the special one, it unlocks the secret area
           player.getLocationList()[location].setRevealed(true); //reveal the special area
         }
+        printBetter("");
       }
       else if (player.getLocationList()[location].getMany() != 0 && userin==1) { //if it is a enemy area and you choose to fight enemies
+        music = new GameMusicPlayer("hometown.mp3");
         music.stop();
         music = new GameMusicPlayer("caught.mp3");
         music.play();
@@ -94,10 +97,12 @@ public class gameFinal {
         music.stop();
       }
       else if (userin == 2) { //customizing inventory
+        music = new GameMusicPlayer("hometown.mp3"); //initializes music so i can stop it
         music.stop();
         customize(player, npc1, npc2); //calls customization method 
       }
       else if (player.getLocationList()[location].getMany() == 0 && userin == 3 && !player.getLocationList()[location].getName().equals("Refugee Camp")) { //if choice is to shop (refugee camp does not have a shop
+        music = new GameMusicPlayer("hometown.mp3");
         music.stop();
         shop(player, location, music);
       }
@@ -131,15 +136,18 @@ public class gameFinal {
           }
         }
         location = getInput(availablePlaces); //You go to the place that you choose
+        music = new GameMusicPlayer("hometown.mp3");
         music.stop();
         notArrived = true; //you have not arrived at the next area
       }
       else if(userin == 5 || userin == 4 && player.getLocationList()[location].getName().equals("Refugee Camp")){ //if you decide to go to the special areas
+        music = new GameMusicPlayer("hometown.mp3");
         music.stop();
         cutscene(player.getLocationList()[location].getLastTimeCutscene(), player, npc1, npc2);  //runs cutscenes
         player.getLocationList()[location].setComplete();  //now you can go to the next area
       }
       if(location == 8 && player.getLocationList()[location].getComplete()){  //if you are at the final location, run the last 3 cutscenes
+        music = new GameMusicPlayer("hometown.mp3");
         music.stop();
         cutscene(19, player, npc1, npc2);
         cutscene(20, player, npc1, npc2);
@@ -794,33 +802,8 @@ public class gameFinal {
         printBetter("I had to painfully end their lives. It was the only way.. The only way to stop it. The abomination. ");
         printBetter("An evil incomprehensible even for us demons. The more humans there are, the more he is summoned.");
         printBetter("I realized this all too late. Now his power is at its peak.");
-        printBetter("Suddenly, a huge roar rocks the cave");
-        printBetter("Demon: Quick bring me to my throne. Help me heal, and I can teleport you to the abomination’s location.");
-        printBetter("You’ll have to trust me if you have any hope of defeating it.");
-        printBetter("Demon: Here, a portal. Hop through and you will arrive near the abonimation. Be careful.");
-        printBetter("The team exchange glances, and one by one, enter the portal.");
-        break;
-      case 19: // beginning eldrich fight scene.
-        printBetter("The team arrives in a desolate area.");
-        printBetter("There appears to be ruins all around them.");
-        printBetter("Slowly the group realized that this used to be their home village.");
-        printBetter("However now it is complety foriegn to " + player.getName() + ".");
-        printBetter("There are pools of lava all around, and strange pillars have risen from the ground.");
-        printBetter("The group looks up. A beast unlike any creature on the planet is hovering over this strange landscape.");
-        printBetter("It catches your eyes and it paralyzes the team in fear. There are hardly words to describe the creature.");
-        printBetter("But this is it. It is time to take back the land from the evil beings.");
-        printBetter("It is time to fight.");
-        battle(player, npc1, npc2, new Enemy(8));
-        break;
-      case 20: //end eldrich fight scene
-        printBetter("The abomination freezes. It appears to be affected by a strong wind.");
-        printBetter("It is torn apart. Bits of its flesh fly off its body and desintegrate until it is no longer.");
-        printBetter("Finally it is over.");
-        printBetter("The land has been freed from the evil.");
-        printBetter(player.getName() + " feels a wonderful sense of completion.");
-        printBetter("Their grand adventure ended in complete success.");
-        break;
-      case 21: //parade
+        printBetter("Suddenly, a huge roar rocks the cave"); music = new GameMusicPlayer("kittyMarchingBand.mp3");
+        music.play();
         printBetter("A few days have passed.");
         printBetter("Applause and cheers echo from all around.");
         printBetter("Ceremonial music plays as your team is carried through Easthaven City.");

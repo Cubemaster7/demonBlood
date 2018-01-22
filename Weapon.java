@@ -1,23 +1,23 @@
-public class Weapon {
+public class Weapon { //object for calling and storing weapons
   private String name;
   private String adjective;
-  private int str;
-  private int con;
-  private int agi;
-  private int dex;
-  private int price;
-  private int id;
+  private int str; //modifier for attack stat
+  private int con; //modifier for defense stat
+  private int agi; //modifier for chance to dodge stat
+  private int dex; //modifier for chance to hit stat
+  private int price; //purchasing price of a weapon
+  private int id;  //weapon number id
   public Weapon(int id){
    this.id = id;
-   switch (id) { 
+   switch (id) {   //depending on the id, it returns the corresponding weapon
      case 1:
-       name = "Wooden Weapon";
-       adjective = "Wooden";
-       str = 0;
+       name = "Wooden Weapon";  //name
+       adjective = "Wooden";  //adjective because each character uses a different type of weapon
+       str = 0; //the following 4 lines are the modifiers for the player stats
        con = 0;
        agi = 0;
        dex = 0;
-       price = 10;
+       price = 10; //price
        break;
      case 2:
        name = "Steel Weapon";
@@ -131,7 +131,7 @@ public class Weapon {
    }
   }
  
-
+//getters and setters
   public String getName(){
     return name;
   }

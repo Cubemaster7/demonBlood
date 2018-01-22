@@ -1,37 +1,37 @@
 public class Enemy {
-  private int id;
-  private int hp;
-  private int exp;
-  private int maxHp;
-  private int str;
-  private int con;
-  private int dex;
-  private int agi;
-  private boolean ableToFlee;
+  private int id; //enemy id
+  private int hp; //health
+  private int exp; //experience it gives when killed
+  private int maxHp; //maximum health
+  private int str; //attack stat
+  private int con;//defense stat
+  private int dex;//chance to hit stat
+  private int agi; //chance to dodge stat
+  private boolean ableToFlee; //if you can flee from the enemy
   private String name = new String();
   private int aggro=1; //The ID of the character who the enemy attacks
   private int aggro1=0; 
   private int aggro2=0; 
   private int aggro3=0; 
-  private int coins;
+  private int coins; //coins it drops
   
   
-  public Enemy(int newId) {
+  public Enemy(int newId) { //id calls the appropriate case
     id = newId;
     switch (id) {
       case 1:
-        name = "Demon Weakling";
-        maxHp = 500;
-        str = 5;
-        con = 5;
-        dex = 3;
-        agi = 3;
-        ableToFlee = true;
-        exp = 25;
-        coins = 5;
+        name = "Demon Weakling"; //name
+        maxHp = 500; //max health
+        str = 5; //attack stat
+        con = 5; //defense stat
+        dex = 3; //chance to hit stat
+        agi = 3; //chance to dodge stat
+        ableToFlee = true; //you can flee
+        exp = 25; //drops 25 cups of blood
+        coins = 5; //drops 5 coins
         break;
       case 2:
-        name = "Demon";
+        name = "Demon"; //basic demon
         maxHp = 1000;
         str = 20;  //damage
         con = 20;  //defense
@@ -42,7 +42,7 @@ public class Enemy {
         coins = 10;
         break;
       case 3:
-        name = "Constricted Demon";
+        name = "Constricted Demon"; //lower tier demon
         maxHp = 750;
         str = 10;
         con = 10;
@@ -53,7 +53,7 @@ public class Enemy {
         coins = 20;
         break;
       case 4:
-        name = "Taint Demon";
+        name = "Taint Demon"; //mini-boss
         maxHp = 1500;
         str = 25;
         con = 20;
@@ -64,7 +64,7 @@ public class Enemy {
         ableToFlee = false;
         break;
       case 5:
-        name = "Boulder Demon";
+        name = "Boulder Demon";//mini-boss
         maxHp = 1500;
         str = 25;
         con = 25;
@@ -75,7 +75,7 @@ public class Enemy {
         ableToFlee = false;
         break;
       case 6:
-        name = "Wither Demon";
+        name = "Wither Demon";//mini-boss
         maxHp = 1500;
         str = 20;
         con = 25;
@@ -86,7 +86,7 @@ public class Enemy {
         ableToFlee = false;
         break;
       case 7:
-        name = "Rage Demon";  //one that attacked village
+        name = "Rage Demon";  //one that attacked village, kinda final boss
         maxHp = 2000;
         str = 25;
         con = 25;
@@ -97,7 +97,7 @@ public class Enemy {
         ableToFlee = false;
         break;
       case 8:
-        name = "Eldrich Abomination";  
+        name = "Eldrich Abomination";   //final boss
         maxHp = 3000;
         str = 30;
         con = 30;
@@ -108,7 +108,7 @@ public class Enemy {
         ableToFlee = false;
         break;
       case 9:
-        name = "Demon Soldier";
+        name = "Demon Soldier"; //top tier demon
         str=12;
         con=12;
         dex=6;
@@ -117,7 +117,7 @@ public class Enemy {
         coins = 20;
         break;
       case 10:
-        name="Demon Specialist";
+        name="Demon Specialist";//top tier demon
         str=18;
         con=18;
         dex=10;
@@ -126,7 +126,7 @@ public class Enemy {
         coins = 20;
         break;
       case 11:
-        name="Demon Brute";
+        name="Demon Brute";//top tier demon
         str=20;
         con=10;
         dex=20;
@@ -137,6 +137,7 @@ public class Enemy {
     }
     hp = maxHp;
   }
+  //getters and setters
   public String getName() {
     return name;
   }
@@ -149,7 +150,7 @@ public class Enemy {
   public int getHp() {
     return hp;
   }
-  public void modHp(int hpMod, int attackerId) {
+  public void modHp(int hpMod, int attackerId) { //controls health during battle
     hp += hpMod;
     if (hp <= 0) {
       hp = 0;
