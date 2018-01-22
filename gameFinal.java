@@ -1,5 +1,5 @@
 import java.util.*;
-public class cutscenesatbottom {
+public class gameFinal {
   public static void main(String[] args) {
     GameTitleCard gmt = new GameTitleCard("DEMONBLOOD.png", 614, 460); //This is the title card that displays at the beginning of the game.
     gmt.isVisible(true); //It shows up and then the player can close out of it or keep it or whatever they want with it.
@@ -825,10 +825,6 @@ public class cutscenesatbottom {
         printBetter("A parade has been thrown for the team's success in defeating the eternal evil that watched over the land.");
         printBetter("Thanks to you, the kingdom has been saved.");
         break;
-        
-        
-        
-        
     }
   }
 }

@@ -119,11 +119,23 @@ public class Character {
    public int getExp() {
      return exp;
    }
-   public void modExp(int expMod) {
+   public void addExp(int expMod) {
      exp += expMod;
+     if(exp-50>=0){
+       exp-=50;
+       lvl+=1;
+       hp+=100;
+       str+=1;
+       con+=1;
+       dex+=1;
+       agi+=1;
+     }
    }
    public int getLvl() {
      return lvl;
+   }
+   public void setLvl(int tempLvl){
+     lvl += tempLvl;
    }
    public int getId() {
      return id;

@@ -49,7 +49,8 @@ public class Location{
         firstTimeCutscene = 5;
         endCutscene = 6;
         manymies = 3;
-        enemyTypes = new int[]{2,3,4}; //References enemy id's in enemy.java.
+        enemyTypes = new int[]{1,2,3}; //References enemy id's in enemy.java.
+        boss = 4;
         break;
       case 3:
         name = "Warrington";
@@ -69,7 +70,8 @@ public class Location{
         firstTimeCutscene = 9;
         endCutscene = 10;
         manymies = 3;
-        enemyTypes = new int[]{2,3,4};
+        enemyTypes = new int[]{2,3,9,10};
+        boss = 5;
         break;
       case 5:
         name = "Around Town";
@@ -89,7 +91,8 @@ public class Location{
         firstTimeCutscene = 13;
         endCutscene = 14;
         manymies = 3;
-        enemyTypes = new int[]{2,3,4};
+        enemyTypes = new int[]{3,9,10,11};
+        boss = 6;
         break;
       case 7:
         name = "Easthaven City";
@@ -104,12 +107,13 @@ public class Location{
         weaponTypes = new int[]{1,2,3,4,5,7,8,9,10,11};
         break;
       case 8:
-        name = "Daemonium Cliffs";
-        description = "A dreary mountain range which is the source of many demonic legends";
+        name = "Demon Realm";
+        description = "Where the demons reside";
         firstTimeCutscene = 17;
-        endCutscene = 0;
+        endCutscene = 18;
         manymies = 3;
-        enemyTypes = new int[]{2,3,4};
+        enemyTypes = new int[]{1,2,3};
+        boss = 7;
         break;
         
     }
