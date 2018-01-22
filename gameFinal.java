@@ -99,7 +99,7 @@ public class gameFinal {
       }
       else if (player.getLocationList()[location].getMany() == 0 && userin == 3 && !player.getLocationList()[location].getName().equals("Refugee Camp")) { //if choice is to shop (refugee camp does not have a shop
         music.stop();
-        shop(player, location);
+        shop(player, location, music);
       }
       else if (player.getLocationList()[location].getMany() != 0 && userin == 3) { //if choice is to fight boss in combat area
         if(player.getLocationList()[location].getName().equals("Field of Stones") || player.getLocationList()[location].getName().equals("Deepland Swamp") || player.getLocationList()[location].getName().equals("Demon Realm")){ //if the location is one of the listed then that means its battle is in its cutscene
@@ -533,9 +533,10 @@ public class gameFinal {
       return "Not Ready";
     }
   }
-  public static void shop(Character player, int location) { //shop interactions
+  public static void shop(Character player, int location, GameMusicPlayer music) { //shop interactions
+    music = new GameMusicPlayer("cantina2.mp3");
+    music.play();
     printBetter("Shopkeeper: \"Buy somethin' will ya!\"");
-    
     boolean shopping = true;
     while (shopping) {
       printBetter(player.getName()+" has "+player.getCoins()+" coins.");
@@ -576,6 +577,7 @@ public class gameFinal {
           shopping = false;
       }
     }
+    music.stop();
   }
   public static void cutscene(int cutscene, Character player, Character npc1, Character npc2) { //contains all cutscenes for the game
     switch (cutscene) {
