@@ -2,18 +2,18 @@ import java.util.*;
 public class Character {
  private String name = new String();
  private String fullName = new String();
- private int maxHp = 500;
- private int hp = 500;
- private int str = 5;
- private int con = 5;
- private int dex = 5;
- private int agi = 5;
- private int baseStr = 5;
- private int baseCon = 5;
- private int baseDex = 5;
- private int baseAgi = 5;
+ private int maxHp = 1000;
+ private int hp = 1000;
+ private int str = 10;
+ private int con = 10;
+ private int dex = 10;
+ private int agi = 10;
+ private int baseStr = 10;
+ private int baseCon = 10;
+ private int baseDex = 10;
+ private int baseAgi = 10;
  private int exp = 0;
- private int lvl = 5;
+ private int lvl = 0;
  private int id;
  private int coins = 50;
  private String pronoun;
@@ -65,15 +65,15 @@ public class Character {
    }
    this.gameId = gameId;
    if (gameId==1) {
-    locationList[0] = new Location(2); //Starting village
+    locationList[0] = new Location(0); //whiteridge
     locationList[1] = new Location(1);  //refugee camp
-    locationList[2] = new Location(0);  //Everton Forest
-    locationList[3] = new Location(3);  //second town
+    locationList[2] = new Location(2);  //forest
+    locationList[3] = new Location(3);  //warrington
     locationList[4] = new Location(4); //Field of Stones
-    locationList[5] = new Location(5); //Deepland swamp
-    locationList[6] = new Location(6); //Daemonium Cliffs
-    locationList[7] = new Location(7);  //Around Town
-    locationList[8] = new Location(8);  //Easthaven City
+    locationList[5] = new Location(5); //around town
+    locationList[6] = new Location(6); //Deepland swamp
+    locationList[7] = new Location(7);  //easthaven city
+    locationList[8] = new Location(8);  //daemonium cliffs
    }
  }
    
@@ -139,14 +139,13 @@ public class Character {
      }
    }
    public void startBattle() {
-     hp = maxHp;
      special1.resetCooldown();
      special2.resetCooldown();
      special3.resetCooldown();
-     str = baseStr + weapon.getStr();
-     agi = baseAgi + weapon.getAgi();
-     con = baseCon + weapon.getCon();
-     dex = baseDex + weapon.getDex();
+     str = baseStr;
+     agi = baseAgi;
+     con = baseCon;
+     dex = baseDex;
      alive = true;
    }
    public SpecialAttack getSpecial(int id) {
@@ -207,15 +206,4 @@ public class Character {
    public void setWeapon(int id) {
      weapon = new Weapon(id);
    }
-  public boolean getExp(int expToGet) {
-   exp += expToGet;
-   if (exp >= 100) {
-    lvl++;
-    exp -= 100;
-    return true;
-   }
-   else {
-    return false;
-   }
-  }
 }
