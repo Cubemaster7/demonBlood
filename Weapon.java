@@ -112,8 +112,8 @@ public class Weapon {
      case 12:
        name = "Old Weapon";
        adjective = "Old";
-       str = -1;
-       con = 0;
+       str = 1;
+       con = 1;
        agi = 0;
        dex = 0;
        price = 0;

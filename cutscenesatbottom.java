@@ -4,9 +4,9 @@ public class cutscenesatbottom {
     GameTitleCard gmt = new GameTitleCard("DEMONBLOOD.png", 614, 460);
     gmt.isVisible(true);
     System.out.println("Who would you like to play as?");
-    System.out.println("1. Australius Gage");
-    System.out.println("2. Claudius Steed");
-    System.out.println("3. Rosalina Berry");
+    System.out.println("1. Australius Gage: Electricity Powers");
+    System.out.println("2. Claudius Steed: Bone Powers");
+    System.out.println("3. Rosalina Berry: Water Powers");
     int userin = getInput(3);
     Character player = new Character(userin, 1);
     Character npc1;
@@ -25,25 +25,37 @@ public class cutscenesatbottom {
     }
     boolean playing = true;
     int location = 0;
+    boolean notArrived = true;
     while (playing) {
+      userin = 0;
+      
       if (player.getLocationList()[location].haventBeen()) {
         cutscene(player.getLocationList()[location].getFirstTimeCutscene(), player, npc1, npc2);
+      }
+      if(!player.getLocationList()[location].getName().equals("Whiteridge") && notArrived){
+        printBetter("The team arrived at "+player.getLocationList()[location].getName()+"!");
+        notArrived = false;
       }
       if (player.getLocationList()[location].getMany() == 0 && player.getLocationList()[location].getAreaRevealed()) {
         System.out.println("1=Talk to people 2=Customize 3=Shop 4=Leave 5=Go to "+player.getLocationList()[location].getArea());
         userin = getInput(5);
       }
       else if 
-        (player.getLocationList()[location].getMany() == 0 && !player.getLocationList()[location].getAreaRevealed()) {
+        (player.getLocationList()[location].getMany() == 0 && !player.getLocationList()[location].getAreaRevealed() && !player.getLocationList()[location].getName().equals("Whiteridge")) {
         System.out.println("1=Talk to people 2=Customize 3=Shop 4=Leave");
         userin = getInput(4);
       }
+      else if(player.getLocationList()[location].getName().equals("Whiteridge")){
+        userin = 4;
+      }
       else {
-        System.out.println("1=Fight enemies 2=Customize 3=Fight "+new Enemy(player.getLocationList()[location].getBoss()).getName()+"4=Leave");
+        System.out.println("1=Fight enemies 2=Customize 3=Fight "+new Enemy(player.getLocationList()[location].getBoss()).getName()+" 4=Leave");
         userin = getInput(4);
       }
       if (player.getLocationList()[location].getMany() == 0 && userin==1) {
-        printBetter(player.getLocationList()[location].getDialogue(getRandom(1,3)));
+        if(player.getLocationList()[location].getDialogue(getRandom(1,3)) == 2){
+          player.getLocationList()[location].setRevealed(true);
+        }
       }
       else if (player.getLocationList()[location].getMany() != 0 && userin==1) {
         battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getEnemyTypes()[getRandom(0,player.getLocationList()[location].getEnemyTypes().length-1)]));
@@ -51,23 +63,41 @@ public class cutscenesatbottom {
       else if (userin == 2) {
         customize(player, npc1, npc2);
       }
-      else if (player.getLocationList()[location].getMany() == 0 && userin == 3) {
+      else if (player.getLocationList()[location].getMany() == 0 && userin == 3) { //if choice is to shop
         shop(player, location);
       }
-      else if (player.getLocationList()[location].getMany() != 0 && userin == 3) {
-        battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getBoss()));
+      else if (player.getLocationList()[location].getMany() != 0 && userin == 3) { //if choice is to fight boss
+        if(player.getLocationList()[location].getName().equals("Field of Stones") || player.getLocationList()[location].getName().equals("Deepland Swamp")){
+          cutscene(player.getLocationList()[location].getLastTimeCutscene(), player, npc1, npc2);
+        }
+        else{
+          battle(player, npc1, npc2, new Enemy(player.getLocationList()[location].getBoss()));
+        }
+        player.getLocationList()[location].setComplete();
       }
       else if (userin == 4) {
+        if(player.getLocationList()[location].getMany() != 0 && player.getLocationList()[location].haventBeen2() && player.getLocationList()[location].getName().equals("Everton Forest") && player.getLocationList()[location].getComplete()){
+          cutscene(player.getLocationList()[location].getLastTimeCutscene(), player, npc1, npc2);
+        }
         int availablePlaces = 0;
-        for (int i = 0; i<player.getLocationList().length; i++ ) {
+        if(player.getLocationList()[location].getComplete()){
+          player.getLocationList()[location+1].setAbleToGo();
+        }
+        System.out.println("Where do you want to go?");
+        for (int i = 1; i<player.getLocationList().length; i++ ) {
           if (player.getLocationList()[i].getAbleToGo()) {
-            System.out.println((i+1)+": "+player.getLocationList()[i].getName());
+            System.out.println((i)+": "+player.getLocationList()[i].getName());
             availablePlaces++;
           }
         }
-        location = getInput(availablePlaces)-1;
-        printBetter("The team arrived at "+player.getLocationList()[location].getName()+"!");
+        location = getInput(availablePlaces);
+        notArrived = true;
       }
+      else if(userin == 5){
+        cutscene(player.getLocationList()[location].getLastTimeCutscene(), player, npc1, npc2);
+        player.getLocationList()[location].setComplete();
+      }
+        
     }
     randomPhrase();
     
@@ -509,14 +539,14 @@ public class cutscenesatbottom {
         printBetter(player.getName()+" turns around, startled, to see the tavern in flames.");
         printBetter("Screams echo from inside as the bodies burn in the hungry flames. Soon, houses and buildings all throughout the village undergo the same gruesome fate.");
         printBetter("AND THEN HERE IS THE PART WHERE THEY NEED TO DO THE DEMON WEAKLING FIGHT TUTORIAL");
-        tutorial(player,new Enemy(0));
+        //tutorial(player,new Enemy(0));
         printBetter("AND THEN THERE'S THE PART WHERE THE PLAYER CHARACTER MEETS UP WITH THEIR 2 FRIENDS AND THEN START FIGHTING A DEMON");
-        battle(player,npc1,npc2,new Enemy(1));
+        //battle(player,npc1,npc2,new Enemy(1));
         break;
-      case 2: //end whiteridget scene
+      case 2: //end whiteridge scene
         printBetter(player.getName() + ": Woohoo we did it!");
         printBetter("Although they celebrate over their minor victory, all around them the village burns.");
-        printBetter("Saddended, they think.");
+        printBetter("Saddended, they think what they should do next.");
         printBetter(player.getName() + ": Well, we should probably get help, maybe find the nearest village.");
         printBetter("And they head off into the dark land beyond their destroyed homes.");
         break;
@@ -527,31 +557,32 @@ public class cutscenesatbottom {
         break;
       case 4: //refugee camp end
         String manName1="Richard";
-        printBetter(player.getName() +  "enters a spacious, dimly lit canvas tent.");
-        printBetter(manName1 + ": New faces. What brings you here?");
+        printBetter(player.getName() +  " enters a spacious, dimly lit canvas tent.");
+        System.out.println(manName1 + ": New faces. What brings you here?");
         System.out.println("1. Our village was destroyed, and we wandered here.");
         System.out.println("2. Just passing through.");
         int choice1=getInput(2);
         if(choice1==1){
           printBetter(manName1 + ": More victims, huh?");
         }
-        else{
-          printBetter(manName1 + ": I am Richard, leader of this makeshift settlement. Everyone staying here is a victim of the demon attacks.");
-        }
+        printBetter(manName1 + ": Well I am Richard, leader of this makeshift settlement. Everyone staying here is a victim of the demon attacks.");
         printBetter(manName1 + ": It's devastating seeing all these lives destroyed.");
         printBetter(manName1 + ": No one's quite sure why, but a firey demon from the demon realm started attacking and destroying villages.");
         printBetter(manName1 + ": So much destruction...  And no one seems to be able to do anything about it.");
-        printBetter("INSERT INSPIRATIONAL SPEECH HERE");
+        printBetter(npc1.getName() + ": We have to do something! We can't just let this happen.");
+        printBetter(npc2.getName() + ": Yeah, too many people are dying. It should be us to save the kingdom.");
         System.out.println("So whatdya say? You wanna join us?");
         System.out.println("1. Heck yeah!");
-        System.out.println("2. Nah, I'm lame");
+        System.out.println("2. No way.");
         int choice2 = getInput(2);
         if(choice2==1){
-          System.out.println("Yay");
+          printBetter("Woohoo!");
         }
         else{
-          System.out.println("Bye bye loser");
+          printBetter("I'm disappointed in you, " + player.getName() + ". But I guess it is your decision to make. Bye.");
+          System.exit(0);
         }
+        printBetter("Inspired, the team exits the tent.");
         break;
       case 5: //beginning forest cutscene
         printBetter("Tall leafy trees tower over the group.");
@@ -572,7 +603,7 @@ public class cutscenesatbottom {
         String manName2="Esmund";
         printBetter(player.getName() + " enters the musty tavern. The only person there is a man sitting in the corner at a table.");
         printBetter(player.getName() + " decide to approach the man, given the rumors you heard from around town.");
-        printBetter(manName2+": Hello there");
+        printBetter(manName2+": Hello there.");
         printBetter(player.getName()+": Can you tell us anything about the demon attacks on the villages?");
         printBetter(manName2+": Getting right to the point, I see. Well you are correct, it is a demon.");
         printBetter(manName2+": It resides in the demon realm, but recently for some unknown reason, it has been emerging from its world to come to ours for the sole purpose of killing people");
@@ -586,6 +617,7 @@ public class cutscenesatbottom {
         printBetter(manName2+": Here's mine. I'm too old to travel anyways.");
         printBetter("THIS IS WHERE YOU GET THE HECKIN MAP");
         printBetter(manName2+": Also you will likely encounter many enemies along the way. You can take my weapon. It's old, that's why I'm giving it to you.");
+        printBetter("Old Weapon acquired");
         addWeapon(player,12);
         printBetter(manName2+": And one final tip: the more enemies you defeat, the more demon blood you get. Demon blood makes you stronger.");
 //printBetter(player.getName() + " has received the " + getWeaponTypes()[i]).getName()) + " !");
@@ -594,7 +626,7 @@ public class cutscenesatbottom {
       case 9: //field of stones beginning
         printBetter("Fully stocked up from their time at Warrington, the group heads towards a wide open expanse of sky.");
         printBetter("In front of them is a vast stretch of bare rock, with no cover between their current position and the end of the field.");
-        printBetter("With no shorter option, they head onwards.");
+        printBetter("With no better option, they head onwards.");
         break;
       case 10: //field of stones end
         printBetter("On the horizon, the team sees man-made structures that appear to be the roofs of houses.");
@@ -602,7 +634,7 @@ public class cutscenesatbottom {
         printBetter("Now motivated, the team picks up the pace.");
         printBetter("Suddenly, the ground starts rumbling all around.");
         printBetter("Out of the stones, a being of rock rises in front of them.");
-        printBetter(player.getName() + "It's a rock demon!");
+        printBetter(player.getName() + ": It's a rock demon!");
         printBetter("FIGHT ROCK DEMON.");
         printBetter("The team continues onwards towards the village ahead.");
         break;
@@ -652,7 +684,7 @@ public class cutscenesatbottom {
         printBetter("THIS IS WHERE YOU FIGHT THE DEMON");
         printBetter("Finally, the demon is defeated. As " + player.getName()+" approaches the skeleton again, " + player.pro()+" realizes that it is clutching a weapon.");
         printBetter("It is dirty and damaged, but it is a weapon.");
-        printBetter("THIS IS THE PART WHERE YOU GET THE DIRTY WEAPON");
+        printBetter("Dirty Weapon acquired");
         addWeapon(player,13);
         printBetter("Satisfied with their experiences, the group heads back up to the surface to leave the swamp.");
         break;
@@ -756,6 +788,8 @@ public class cutscenesatbottom {
         printBetter("A parade has been thrown for the team's success in defeating the eternal evil that watched over the land.");
         printBetter("Thanks to you, the kingdom has been saved.");
         break;
+        
+        
         
         
     }
